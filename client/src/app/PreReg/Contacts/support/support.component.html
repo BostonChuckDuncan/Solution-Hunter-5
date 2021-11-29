@@ -1,0 +1,77 @@
+<div class="workspace">
+  <div class="flexColumn">
+    <!-- left column -->
+    <div style="height: 8vh"></div>
+    <div style="margin-left: 4%">
+      <div class="flexRow">
+        <div class="card card-titles">
+          <div style="margin: 5px 15px; z-index: 1;">
+            <h1 style="color: #E67E22; padding-top: 10px;">Technical Support</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="flexRow" style="height: 2vh"></div>
+
+      <div class="flexRow">
+        <div class="card card-content">
+          <div class="explainText">
+            <p>For <b>General or Sales information</b>, please go to Contacts -> Contact Us.</p>
+            <p>For <b>Technical Support</b> fill in the information below for either email or a scheduled chat session.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="overflow:auto;">
+      <form [formGroup]="support" (ngSubmit)="submitSupport()" novalidate>
+        <div style="height: 3vh"></div>
+        <div style="color: rgb(243, 181, 9);">
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="col-2">
+              <span style="color:yellow; width: 50px;" *ngIf="(f.login?.touched || f.login?.dirty) && 
+                      (f.login?.hasError('required') || f.login?.hasError('minlength'))">
+                <strong> Id required</strong> (or use contact Us)</span>
+              <input type="text" class="form-control" formControlName="login" placeholder="login id" data-lpignore="true">
+            </div>
+            <div class="col-4">
+              <span style="color:yellow;"
+                *ngIf="f.email.touched && (f.email.hasError('required') || f.email.hasError('minlength'))">
+                <strong> Email is required</strong></span>
+              <input type="text" class="form-control" formControlName="email" placeholder="email address" data-lpignore="true">
+            </div>
+            <div class="col-2">
+              <span style="color:yellow"
+                *ngIf="f.phone.touched && this.support.controls.phone.value != null && f.phone.hasError('pattern') ">
+                <strong> Phone in the form XXX-XXX-XXXX</strong></span>
+              <input type="text" class="form-control" formControlName="phone" placeholder="phone number" data-lpignore="true">
+            </div>
+
+          </div>
+
+          <div class="row" style="height: 2vh"></div>
+
+          <div class="row">
+            <div class="col-1"></div>
+            <div class="col-8">
+              <span style="color:yellow"
+                *ngIf="f.message.touched && (f.message.hasError('required') || f.message.hasError('minlength'))">
+                <strong> Message is required</strong></span>
+              <textarea style="width: 100%; height: 80px;" class="rounded" formControlName="message" placeholder="Message"></textarea>
+            </div>
+          </div>
+
+          <div class="row" style="height: 2vh"></div>
+
+          <div>
+            <button [disabled]="!support.valid" class="btn btn-success" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+</div>

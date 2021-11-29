@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/757a8f21-1377-4909-af14-2b2ae124b104/resourceGroups/appsvc_windows_centralus_basic/providers/Microsoft.Web/sites/SolutionHunter",
+    "appService.deploySubpath": "API\\Publish"
+}

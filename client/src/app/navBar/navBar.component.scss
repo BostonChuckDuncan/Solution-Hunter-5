@@ -1,0 +1,36 @@
+mat-toolbar {
+    position: sticky;
+    top: 0px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+::ng-deep .mat-menu-content{
+  padding: 0px !important;
+  border: 1px solid white;
+}
+
+.mat-menu-item:hover {
+  color: white;
+  background:  #0a5746 !important;
+}
+
+.mat-menu-item {
+  background-color:#850f1a; 
+  color: white;
+}
+
+.mat-menu-item:hover .mat-icon{
+  color:white;
+}
+
+.navBarStyle {
+  background-color:#850f1a; 
+  color: white
+}
+
+mat-menu {
+  margin-left: 20px;
+}

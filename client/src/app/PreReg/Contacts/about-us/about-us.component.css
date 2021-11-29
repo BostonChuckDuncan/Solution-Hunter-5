@@ -1,0 +1,25 @@
+body, html {
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative;
+  overflow: hidden;
+  min-width: 1170px;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: row;
+
+  flex-grow: 1;
+  justify-content: flex-start;
+  background: url("/assets/Images/AboutUs.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-position: 0px 64px;
+  
+  position: fixed;
+  height: 92vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+

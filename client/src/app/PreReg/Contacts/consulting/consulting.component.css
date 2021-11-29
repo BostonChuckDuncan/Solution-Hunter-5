@@ -1,0 +1,70 @@
+body, html {
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.workspace {
+  background: url("/assets/Images/Consulting.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-position: 0px 64px;
+  
+  position: fixed;
+  height: 92vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+  h1 {
+    color: lime;
+  }
+
+  h2 {
+    color: steelblue;
+  }
+
+  .explainText {
+    font-size: 1.3em;
+    color: black;
+    margin: 20px 11px;
+  }
+
+.formspace {
+  color: white;
+  margin-top: 60px;
+}
+
+.card {
+  background: linear-gradient(white, beige, #f9ecc7 );
+  border-bottom: 5px solid lightgray;
+  border-right: 5px solid lightgray;
+  margin-left: 60px;
+  margin-right: 0px;
+  z-index: 1;
+}
+
+.card-titles {
+  width: 35vw;
+  height: 5%;
+  z-index: 1;
+}
+
+.card-content {
+  width: 80vw;
+  height: 80%;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  z-index: 1;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}

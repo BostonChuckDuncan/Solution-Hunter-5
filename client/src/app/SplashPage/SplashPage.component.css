@@ -1,0 +1,10 @@
+.workspace {
+    background: url('/assets/Images/SolutionHunterSplashImage.png') no-repeat center center fixed;
+    background-size: cover;
+    background-position: 0px 64px;
+  
+    position: fixed;
+    height: 92vh;
+    width: 100%;
+  }
+  

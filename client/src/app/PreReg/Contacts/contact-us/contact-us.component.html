@@ -1,0 +1,62 @@
+<div class="workspace">
+  <div class="formspace" style='z-index: -1'>
+    <div class="flexRow" style="height: 5vh"></div>
+
+    <div style="margin-left: 45px;">
+
+      <form [formGroup]="contactUsForm" (submit)="submitContactUs()" [autocomplete]="'off'" novalidate>
+        <div class="flexRow" style="height: 5vh"></div>
+        <div class="col-md-3 flex-column" style="height: 60vh">
+          <table style="border: none" class="table-light rounded">
+            <tr>
+              <!-- <td>Your Email</td> -->
+              <td><input type="text" class="form-control" formControlName="email" placeholder="your email"></td>
+            </tr>
+            <!-- <tr>
+              <td></td> -->
+              <td style="color:tomato">
+                <div *ngIf="f.email.touched && f.email.hasError('required') ">
+                  Email address is required.
+                </div>
+                <div *ngIf="f.email.hasError('pattern')">
+                  This does not appear to be a valid email address. 
+                </div>
+              </td>
+            <!-- </tr> -->
+            <tr>
+              <!-- <td>Phone</td> -->
+              <td><input type="text"  class="form-control" formControlName="phone" placeholder="optional phone number"></td>
+            </tr>
+            <tr>
+              <!-- <td></td> -->
+              <td style="color:tomato">
+                <div *ngIf="f.phone.hasError('pattern')">
+                  Not a recognized phone number xxx-xxx-xxxx<br>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <!-- <td>Message</td> -->
+              <td><textarea rows="6" cols="50" class="rounded" formControlName="message" placeholder="message"></textarea></td>
+            </tr>
+            <tr>
+              <td>
+                <div *ngIf="f.message.hasError('minlength')">
+                  Please enter a message to send.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <!-- <td></td> -->
+              <td style="margin-top: 25px;">
+                  <button [disabled]="!contactUsForm.valid" 
+                      class="btn btn-success" style="height: 35px;" type="submit">Submit</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
