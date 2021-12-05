@@ -14,15 +14,10 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly DataContext _context;
+//        private readonly DataContext _context;
         private readonly ITokenService _tokenService;
         private readonly UserManager<AppUser> userManager;
 
-        public AccountController(IMapper _mapper)
-        {
-            this._mapper = _mapper;
-
-        }
         public IMapper _mapper { get; }
         public RoleManager<AppRole> _roleManager { get; }
         public UserManager<AppUser> _userManager { get; }
@@ -36,7 +31,7 @@ namespace API.Controllers
             _mapper = mapper;
             _roleManager = roleManager;
             _userManager = userManager;
-            _context = context;
+            // _context = context;
             _tokenService = tokenService;
         }
 
@@ -49,11 +44,13 @@ namespace API.Controllers
 
             user.UserName = registerDto.Username.ToLower();
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            var newUser = await _userManager.FindByNameAsync(user.UserName);
-            await _userManager.AddToRoleAsync(newUser, "User");
+            if (!result.Succeeded) return BadRequest(result.Errors);
+
+            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+
+            if (!roleResult.Succeeded) return BadRequest(result.Errors);
 
             return new UserDto()
             {
@@ -79,12 +76,21 @@ namespace API.Controllers
                 };
                 await Register(adminDto);
 
+                // var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+
+                // var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+
+
                 // initialize the list of roles
                 var roles = new List<AppRole>
                 {
                     new AppRole { Name = "Admin" },
-                    new AppRole { Name = "User" },
-                    new AppRole { Name = "Evaluator" }
+                    new AppRole { Name = "Lead" },
+                    new AppRole { Name = "Tester" },
+                    new AppRole { Name = "Member" },
+                    new AppRole { Name = "Trial" },
+                    new AppRole { Name = "Visitor" }
                 };
 
                 foreach (var role in roles)
@@ -93,24 +99,25 @@ namespace API.Controllers
                 };
 
                 var adminUser = await _userManager.FindByNameAsync("admin");
-                IEnumerable<string> adminRoles = new List<string>() { "Admin", "User", "Evaluator" };
+                IEnumerable<string> adminRoles = new List<string>() 
+                    { "Admin", "Lead", "Tester", "Member", "Visitor" };
                 await _userManager.AddToRolesAsync(adminUser, adminRoles);
 
                 return null;
             }
 
-            bool hasUsers = await _context.Users.AnyAsync();
+            bool hasUsers = await _userManager.Users.AnyAsync();
             if (!hasUsers && loginDto.Username.Length == 0 && loginDto.Password.Length == 0)
             {
                 // create a default admin - The new admin must change password right away!
                 // error for now
-                throw new System.Exception("System Initial must be performed first! Contact Solution Hunter Engineering");
+                throw new System.Exception("System not Initialize! Contact Solution Hunter Engineering");
             }
 
-            var user = await _context.Users
+            var user = await _userManager.Users
                 .SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
 
-            if (user == null) return Unauthorized("Unauthorized User (1)");
+            if (user == null) return Unauthorized("Unauthorized User");
 
             return new UserDto()
             {
@@ -123,12 +130,12 @@ namespace API.Controllers
 
         private async Task<bool> UserExists(string username)
         {
-            return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
+            return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
         }
 
         private async Task<bool> AnyUsersExist()
         {
-            return (await _context.Users.CountAsync()) != 0;
+            return (await _userManager.Users.CountAsync()) != 0;
         }
     }
 }

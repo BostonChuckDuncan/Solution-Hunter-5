@@ -14,7 +14,6 @@ namespace API.Entities
         public string EmailAddress { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
-        public bool IsSystemAdmin { get; set; }
         public bool IsTrialMode { get; set; }
 
         public ICollection<AppUserRole> UserRoles { get; set; }

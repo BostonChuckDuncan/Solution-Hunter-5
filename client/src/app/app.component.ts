@@ -17,17 +17,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.baseUrl = environment.apiUrl;
-    this.getUsers();
+    // this.getUsers();
     this.cache.setUserLoginStatus('navVisitor');
   }
 
-  getUsers() {
-    this.http.get(this.baseUrl + 'users').subscribe( response => {
-        this.users = response;
-      },
-      error => {
-        console.log(error)
-      });
-  }
+  // getUsers() {
+  //   this.http.get(this.baseUrl + 'users').subscribe( response => {
+  //       this.users = response;
+  //     },
+  //     error => {
+  //       console.log(error)
+  //     });
+  // }
 }
 
